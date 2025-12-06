@@ -1,0 +1,40 @@
+name: Auto Post Jokes & Memes
+
+on:
+  schedule:
+    # Post 3 times per day at optimal times (UTC)
+    # Recommended schedule for best engagement
+    # Times shown are for IST (UTC+5:30):
+    # 2:30 AM UTC = 8:00 AM IST (Morning - Start the day with a smile!)
+    # 8:30 AM UTC = 2:00 PM IST (Afternoon - Lunch break humor)
+    # 12:30 PM UTC = 6:00 PM IST (Evening - PEAK ENGAGEMENT TIME!)
+    - cron: '30 2,8,12 * * *'
+  
+  workflow_dispatch:  # Allow manual trigger
+
+
+jobs:
+  post-joke:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Post joke/meme to Telegram
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        CHAT_ID: ${{ secrets.CHAT_ID }}
+        TIMEZONE_OFFSET_HOURS: ${{ secrets.TIMEZONE_OFFSET_HOURS }}
+      run: |
+        python -m src.main

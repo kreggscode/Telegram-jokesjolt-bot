@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto Bot Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+  <header>
+    <h1>💰 Cryptocurrency Bot Dashboard</h1>
+    <p style="margin: 0.5rem 0 0 0; opacity: 0.9; font-size: 0.95rem;">Real-Time Prices • Crypto News • Education •
+      Trading Tips</p>
+  </header>
+
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+      <div class="flash flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>Powered by CoinGecko API, CryptoCompare & Pollinations.ai | Stay Informed, Trade Smart 🚀💎</p>
+  </footer>
+</body>
+
+</html>

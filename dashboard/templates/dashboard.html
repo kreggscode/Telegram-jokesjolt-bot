@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card-grid">
+    <!-- CRYPTO DATA SECTION -->
+    <div class="section-header">
+        <h2>💰 Live Crypto Data</h2>
+    </div>
+    
+    <div class="card highlight">
+        <h2>📊 Crypto Prices</h2>
+        <p>Top 15 cryptocurrencies with real-time prices and 24h changes.</p>
+        <a href="{{ url_for('send_crypto_prices') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card highlight">
+        <h2>📰 Crypto News</h2>
+        <p>Latest cryptocurrency news from top sources.</p>
+        <a href="{{ url_for('send_crypto_news') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card highlight">
+        <h2>🔥 Trending Coins</h2>
+        <p>Most searched and trending cryptocurrencies right now.</p>
+        <a href="{{ url_for('send_trending_coins') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <!-- EDUCATIONAL CONTENT SECTION -->
+    <div class="section-header">
+        <h2>📚 Educational Content</h2>
+    </div>
+
+    <div class="card">
+        <h2>🎓 Crypto Education</h2>
+        <p>Explain blockchain, Bitcoin, Ethereum, and crypto concepts.</p>
+        <a href="{{ url_for('send_crypto_education') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card">
+        <h2>💡 Trading Tips</h2>
+        <p>Practical cryptocurrency trading tips and strategies.</p>
+        <a href="{{ url_for('send_trading_tips') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card">
+        <h2>🔐 Security Tips</h2>
+        <p>Crypto security best practices and scam awareness.</p>
+        <a href="{{ url_for('send_crypto_security') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card">
+        <h2>🏦 DeFi Explained</h2>
+        <p>Decentralized Finance concepts and protocols.</p>
+        <a href="{{ url_for('send_defi_explained') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card">
+        <h2>📊 Market Analysis</h2>
+        <p>Cryptocurrency market trends and sentiment analysis.</p>
+        <a href="{{ url_for('send_market_analysis') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card">
+        <h2>🚀 Crypto Projects</h2>
+        <p>Spotlight on popular blockchain projects and platforms.</p>
+        <a href="{{ url_for('send_crypto_project') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card">
+        <h2>🎨 NFT Knowledge</h2>
+        <p>NFT concepts, use cases, and marketplace info.</p>
+        <a href="{{ url_for('send_nft_knowledge') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card">
+        <h2>👋 Beginner Guide</h2>
+        <p>Getting started with cryptocurrency for newcomers.</p>
+        <a href="{{ url_for('send_beginner_guide') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card">
+        <h2>📖 Crypto Terms</h2>
+        <p>Explain crypto slang and terminology (HODL, FOMO, etc.).</p>
+        <a href="{{ url_for('send_crypto_terminology') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <!-- INTERACTIVE CONTENT SECTION -->
+    <div class="section-header">
+        <h2>🎯 Interactive Content</h2>
+    </div>
+
+    <div class="card">
+        <h2>🎯 Daily Challenge</h2>
+        <p>Fun crypto quizzes and challenges for your audience.</p>
+        <a href="{{ url_for('send_daily_challenge') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card">
+        <h2>🎨 Image + Text</h2>
+        <p>Stunning AI-generated crypto images with educational captions.</p>
+        <a href="{{ url_for('send_image_post') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card">
+        <h2>📊 Poll</h2>
+        <p>Multiple-choice cryptocurrency quiz for engagement.</p>
+        <a href="{{ url_for('send_poll') }}" class="btn">Send to Channel</a>
+    </div>
+
+    <div class="card">
+        <h2>🧵 Thread</h2>
+        <p>4-part educational thread on crypto topics.</p>
+        <a href="{{ url_for('send_thread') }}" class="btn">Send to Channel</a>
+    </div>
+</div>
+{% endblock %}
