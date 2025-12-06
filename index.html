@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JokesJolt - Your Daily Dose of Laughter 😂</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2C3E50;
+            --light: #ECF0F1;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-size: 60px;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .joke-display {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .joke-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .joke-text {
+            font-size: 1.3rem;
+            color: white;
+            line-height: 1.6;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .joke-category {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            color: white;
+        }
+
+        .loading {
+            display: none;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            font-weight: 600;
+        }
+
+        .copy-notification.show {
+            transform: translateX(0);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(102, 126, 234, 0.2);
+            color: #666;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .joke-text {
+                font-size: 1.1rem;
+            }
+
+            .buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">😂</div>
+            <h1>JokesJolt</h1>
+            <p class="tagline">Your Daily Dose of Laughter</p>
+        </div>
+
+        <div class="joke-display" id="jokeDisplay">
+            <div class="joke-text" id="jokeText">
+                Click a button below to get a hilarious joke! 🎭
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-primary" onclick="getJoke('any')">
+                <span>😄 Random Joke</span>
+            </button>
+            <button class="btn btn-secondary" onclick="getJoke('dad')">
+                <span>👨 Dad Joke</span>
+            </button>
+            <button class="btn btn-accent" onclick="getJoke('programming')">
+                <span>💻 Tech Humor</span>
+            </button>
+            <button class="btn btn-success" onclick="getJoke('pun')">
+                <span>🎭 Pun</span>
+            </button>
+        </div>
+
+        <div class="buttons" style="grid-template-columns: 1fr;">
+            <button class="btn btn-primary" onclick="copyJoke()" id="copyBtn" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                <span>📋 Copy Joke</span>
+            </button>
+        </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="jokesGenerated">0</div>
+                <div class="stat-label">Jokes Generated</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="laughsShared">0</div>
+                <div class="stat-label">Laughs Shared</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Made with ❤️ and 😂</p>
+            <p><a href="https://github.com/kreggscode/Telegram-jokesjolt-bot" target="_blank">View on GitHub</a></p>
+        </div>
+    </div>
+
+    <div class="copy-notification" id="copyNotification">
+        ✅ Joke copied to clipboard!
+    </div>
+
+    <script>
+        let currentJoke = '';
+        let jokesCount = 0;
+        let laughsCount = 0;
+
+        // Load stats from localStorage
+        window.onload = function() {
+            jokesCount = parseInt(localStorage.getItem('jokesCount') || '0');
+            laughsCount = parseInt(localStorage.getItem('laughsCount') || '0');
+            updateStats();
+        };
+
+        function updateStats() {
+            document.getElementById('jokesGenerated').textContent = jokesCount;
+            document.getElementById('laughsShared').textContent = laughsCount;
+            localStorage.setItem('jokesCount', jokesCount);
+            localStorage.setItem('laughsCount', laughsCount);
+        }
+
+        async function getJoke(type) {
+            const jokeText = document.getElementById('jokeText');
+            const jokeDisplay = document.getElementById('jokeDisplay');
+            
+            // Show loading
+            jokeText.innerHTML = '<div class="loading active">🎲 Getting a hilarious joke...</div>';
+            
+            // Disable all buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => btn.disabled = true);
+
+            try {
+                let joke;
+                
+                if (type === 'any') {
+                    joke = await fetchJokeAPI();
+                } else if (type === 'dad') {
+                    joke = await fetchDadJoke();
+                } else if (type === 'programming') {
+                    joke = await fetchProgrammingJoke();
+                } else if (type === 'pun') {
+                    joke = await fetchPunJoke();
+                }
+
+                currentJoke = joke.text;
+                jokeText.innerHTML = `
+                    ${joke.text}
+                    ${joke.category ? `<div class="joke-category">${joke.category}</div>` : ''}
+                `;
+
+                // Update stats
+                jokesCount++;
+                updateStats();
+
+            } catch (error) {
+                jokeText.innerHTML = '😅 Oops! Failed to fetch a joke. Try again!';
+                console.error('Error:', error);
+            } finally {
+                // Re-enable buttons
+                buttons.forEach(btn => btn.disabled = false);
+            }
+        }
+
+        async function fetchJokeAPI() {
+            const response = await fetch('https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit');
+            const data = await response.json();
+            
+            if (data.type === 'single') {
+                return {
+                    text: data.joke,
+                    category: data.category
+                };
+            } else {
+                return {
+                    text: `${data.setup}<br><br>...${data.delivery}`,
+                    category: data.category
+                };
+            }
+        }
+
+        async function fetchDadJoke() {
+            const response = await fetch('https://icanhazdadjoke.com/', {
+                headers: { 'Accept': 'application/json' }
+            });
+            const data = await response.json();
+            return {
+                text: data.joke,
+                category: 'Dad Joke'
+            };
+        }
+
+        async function fetchProgrammingJoke() {
+            const response = await fetch('https://official-joke-api.appspot.com/jokes/programming/random');
+            const data = await response.json();
+            const joke = data[0];
+            return {
+                text: `${joke.setup}<br><br>...${joke.punchline}`,
+                category: 'Programming'
+            };
+        }
+
+        async function fetchPunJoke() {
+            const response = await fetch('https://v2.jokeapi.dev/joke/Pun?blacklistFlags=nsfw,religious,political,racist,sexist,explicit');
+            const data = await response.json();
+            
+            if (data.type === 'single') {
+                return {
+                    text: data.joke,
+                    category: 'Pun'
+                };
+            } else {
+                return {
+                    text: `${data.setup}<br><br>...${data.delivery}`,
+                    category: 'Pun'
+                };
+            }
+        }
+
+        async function copyJoke() {
+            if (!currentJoke) {
+                alert('Generate a joke first! 😊');
+                return;
+            }
+
+            // Remove HTML tags for copying
+            const textToCopy = currentJoke.replace(/<br>/g, '\n').replace(/<[^>]*>/g, '');
+            
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                
+                // Show notification
+                const notification = document.getElementById('copyNotification');
+                notification.classList.add('show');
+                
+                // Update laughs count
+                laughsCount++;
+                updateStats();
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            } catch (error) {
+                alert('Failed to copy. Please try again!');
+            }
+        }
+    </script>
+</body>
+</html>
