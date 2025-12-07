@@ -30,18 +30,34 @@ def send_text(text: str):
 
 
 def send_photo(image_url: str, caption: str = ""):
-    """Send photo to Telegram with error handling"""
+    """Send photo to Telegram with error handling - downloads image first"""
     url = f"{BASE_URL}/sendPhoto"
-    data = {
-        "chat_id": CHAT_ID,
-        "photo": image_url,
-        "caption": caption
-    }
     
     try:
         print(f"📤 Sending photo to chat_id: {CHAT_ID}")
         print(f"Image URL: {image_url[:100]}...")
-        resp = requests.post(url, data=data, timeout=60)
+        
+        # Download the image first
+        print("⬇️  Downloading image...")
+        img_response = requests.get(image_url, timeout=30)
+        
+        if img_response.status_code != 200:
+            print(f"❌ Failed to download image. Status: {img_response.status_code}")
+            return img_response
+        
+        print(f"✅ Image downloaded ({len(img_response.content)} bytes)")
+        
+        # Send as multipart file upload
+        files = {
+            'photo': ('meme.jpg', img_response.content, 'image/jpeg')
+        }
+        data = {
+            "chat_id": CHAT_ID,
+            "caption": caption
+        }
+        
+        print("📤 Uploading to Telegram...")
+        resp = requests.post(url, data=data, files=files, timeout=60)
         
         if resp.status_code == 200:
             print("✅ Photo sent successfully!")
