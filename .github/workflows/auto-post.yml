@@ -2,13 +2,15 @@ name: Auto Post Jokes & Memes
 
 on:
   schedule:
-    # Post 3 times per day at optimal times (UTC)
-    # Recommended schedule for best engagement
+    # Post 6 times per day at optimal times (UTC)
     # Times shown are for IST (UTC+5:30):
-    # 2:30 AM UTC = 8:00 AM IST (Morning - Start the day with a smile!)
-    # 8:30 AM UTC = 2:00 PM IST (Afternoon - Lunch break humor)
-    # 12:30 PM UTC = 6:00 PM IST (Evening - PEAK ENGAGEMENT TIME!)
-    - cron: '30 2,8,12 * * *'
+    # 2:30 AM UTC = 8:00 AM IST (Morning)
+    # 5:30 AM UTC = 11:00 AM IST (Mid-Morning)
+    # 8:30 AM UTC = 2:00 PM IST (Afternoon)
+    # 11:30 AM UTC = 5:00 PM IST (Evening)
+    # 14:30 PM UTC = 8:00 PM IST (Night - PEAK TIME!)
+    # 17:30 PM UTC = 11:00 PM IST (Late Night)
+    - cron: '30 2,5,8,11,14,17 * * *'
   
   workflow_dispatch:  # Allow manual trigger
 
