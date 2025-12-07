@@ -72,21 +72,19 @@ def decide_post_type() -> str:
         ]
         return random.choice(afternoon_options)
     
-    # Evening Post (6-8 PM): MEMES WITH IMAGES (High engagement time!)
+    # Evening Post (6-8 PM): POLLS & THREADS (Interactive content!)
     elif 18 <= hour < 20:
-        # 70% chance of visual content
-        evening_weighted = (
-            ["meme_with_image"] * 5 +
-            ["joke_with_image"] * 2 +
-            ["poll", "thread", "daily_challenge"]
-        )
-        return random.choice(evening_weighted)
+        evening_options = [
+            "poll", "thread", "daily_challenge",
+            "api_joke", "funny_joke"
+        ]
+        return random.choice(evening_options)
     
     # Night Post (9-11 PM): VARIETY (Keep it fun!)
     elif 21 <= hour < 23:
         night_options = [
             "api_joke", "relationship_humor", "animal_joke",
-            "funny_joke", "pun", "meme_with_image"
+            "funny_joke", "pun", "thread"
         ]
         return random.choice(night_options)
     
@@ -105,8 +103,7 @@ def decide_post_type() -> str:
             "funny_joke", "tech_humor", "food_humor", "animal_joke",
             "work_humor", "relationship_humor", "observational_humor",
             "random_fact", "shower_thought", "motivational_funny",
-            "daily_challenge", "meme_with_image", "joke_with_image",
-            "poll", "thread"
+            "daily_challenge", "poll", "thread"
         ]
         return random.choice(all_options)
 

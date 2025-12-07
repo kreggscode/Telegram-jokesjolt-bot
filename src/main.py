@@ -137,41 +137,8 @@ def post_daily_challenge():
     tg.send_text(text)
 
 
-def post_meme_with_image():
-    """Post a hilarious meme with AI-generated image"""
-    # Select random meme template
-    image_keys = list(IMAGE_TEMPLATES.keys())
-    selected_image = random.choice(image_keys)
-    
-    # Select random caption type
-    caption_options = [
-        "meme_caption", "funny_joke", "observational_humor",
-        "work_humor", "food_humor", "tech_humor"
-    ]
-    selected_caption = random.choice(caption_options)
-    
-    text_prompt = TEXT_TEMPLATES[selected_caption]
-    img_prompt = IMAGE_TEMPLATES[selected_image]
-
-    caption = ai.generate_text(text_prompt)
-    img_url = ai.image_url(img_prompt)
-
-    tg.send_photo(img_url, caption)
-
-
-def post_joke_with_image():
-    """Post a joke with a funny image"""
-    # Get a real joke from API
-    joke_data = jokes_client.get_any_joke()
-    caption = jokes_client.format_joke(joke_data)
-    
-    # Select a fun image
-    image_keys = list(IMAGE_TEMPLATES.keys())
-    selected_image = random.choice(image_keys)
-    img_prompt = IMAGE_TEMPLATES[selected_image]
-    img_url = ai.image_url(img_prompt)
-    
-    tg.send_photo(img_url, caption)
+# REMOVED: Meme/image functions - they don't work on GitHub Actions
+# Keeping it simple with TEXT JOKES ONLY
 
 
 def post_poll():
@@ -217,7 +184,7 @@ def main():
     post_type = sched.decide_post_type()
     print(f"Decided post type: {post_type}")
 
-    # Map post types to functions
+    # Map post types to functions - TEXT ONLY (no images/memes)
     post_functions = {
         "api_joke": post_api_joke,
         "dad_joke": post_dad_joke,
@@ -234,8 +201,6 @@ def main():
         "shower_thought": post_shower_thought,
         "motivational_funny": post_motivational_funny,
         "daily_challenge": post_daily_challenge,
-        "meme_with_image": post_meme_with_image,
-        "joke_with_image": post_joke_with_image,
         "poll": post_poll,
         "thread": post_thread,
     }
